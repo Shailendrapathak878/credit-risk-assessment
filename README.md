@@ -98,6 +98,13 @@ docs/      Architecture, API, and synthetic demo scenarios
 python -m pip install -r requirements.txt
 ```
 
+For local tests and training/report generation, install the additional
+development dependencies:
+
+```bash
+python -m pip install -r requirements-dev.txt
+```
+
 ## Running Locally
 
 ```bash

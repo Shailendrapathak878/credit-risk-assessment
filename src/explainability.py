@@ -8,7 +8,6 @@ import re
 from pathlib import Path
 from typing import Any
 
-import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import shap
@@ -132,6 +131,8 @@ def create_shap_summary_plot(
     plot_type: str = "dot",
 ) -> None:
     """Save a SHAP summary plot without displaying it."""
+    import matplotlib.pyplot as plt
+
     output = Path(path)
     output.parent.mkdir(parents=True, exist_ok=True)
     plt.figure(figsize=(12, 9))
@@ -156,6 +157,8 @@ def create_shap_dependence_plot(
     path: str | Path,
 ) -> None:
     """Save a dependence plot for one transformed numeric feature."""
+    import matplotlib.pyplot as plt
+
     if feature_name not in feature_names:
         raise ValueError(f"Unknown transformed feature: {feature_name}")
     output = Path(path)

@@ -6,7 +6,6 @@ import logging
 from pathlib import Path
 from typing import Any
 
-import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from sklearn.calibration import CalibratedClassifierCV, calibration_curve
@@ -161,6 +160,8 @@ def save_calibration_curve(
     n_bins: int = 10,
 ) -> None:
     """Save a training-OOF calibration curve."""
+    import matplotlib.pyplot as plt
+
     figure_path = Path(path)
     figure_path.parent.mkdir(parents=True, exist_ok=True)
     plt.figure(figsize=(8, 6))
