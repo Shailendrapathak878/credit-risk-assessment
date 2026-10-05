@@ -1,0 +1,15 @@
+logical_feature,mean_absolute_shap
+income_to_loan_ratio,0.9240233
+loan_grade,0.8706445
+loan_intent,0.83457565
+person_home_ownership,0.7696909
+person_income,0.7205559
+loan_int_rate,0.5714789
+loan_percent_income,0.24792151
+person_emp_length,0.10672936
+employment_stability_ratio,0.1028513
+person_age,0.09577774
+loan_amnt,0.09017642
+credit_history_age_ratio,0.048840046
+cb_person_default_on_file,0.0381741
+cb_person_cred_hist_length,0.02125625

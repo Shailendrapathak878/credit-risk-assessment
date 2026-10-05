@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Credit Risk Assessment</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="header">
+      <div>
+        <p class="eyebrow">CREDIT ASSESSMENT</p>
+        <h1>Credit Risk Assessment</h1>
+        <p class="subtitle">Review an applicant profile and understand the model's assessment.</p>
+      </div>
+      <div id="api-status" class="status offline"><span>●</span> API Offline</div>
+    </header>
+
+    <section class="hero panel">
+      <p class="eyebrow">MACHINE LEARNING RISK ESTIMATE</p>
+      <h2>AI-Powered Credit Risk Assessment</h2>
+      <p class="hero-subtitle">Estimate the likelihood of loan default using applicant financial and credit information.</p>
+      <div class="hero-cards" aria-label="Assessment overview">
+        <div class="hero-card"><span>What it predicts</span><strong>Loan Default Risk</strong></div>
+        <div class="hero-card"><span>What it analyzes</span><strong>Income • Loan Details • Employment • Credit History</strong></div>
+        <div class="hero-card"><span>Model</span><strong>Tuned XGBoost</strong></div>
+        <div class="hero-card"><span>Explanation</span><strong>SHAP-based</strong></div>
+      </div>
+    </section>
+
+    <details class="how-it-works">
+      <summary>How does this assessment work?</summary>
+      <ol>
+        <li>Enter applicant information.</li>
+        <li>The model analyzes the provided information.</li>
+        <li>The model estimates loan default risk.</li>
+        <li>The explanation shows which factors influenced the estimate.</li>
+      </ol>
+    </details>
+
+    <div class="section-introduction">
+      <p class="section-kicker">Applicant Information</p>
+      <p>Enter the applicant's details below to estimate credit risk.</p>
+    </div>
+
+    <section class="grid">
+      <form id="applicant-form" class="panel form-panel">
+        <div class="panel-heading">
+          <div><p class="section-kicker">Applicant profile</p><h2>Tell us about the applicant</h2></div>
+          <span>Required fields</span>
+        </div>
+        <p class="form-intro">Use the information available for this application. The assessment is for demonstration only.</p>
+        <div class="info-note"><strong>What do these fields mean?</strong><span>These details describe the applicant, the requested loan, and their credit history.</span></div>
+        <div id="form-error" class="alert hidden" role="alert"></div>
+
+        <section class="form-section">
+          <div class="form-section-heading"><div><h3>Personal Information</h3><p>Basic details about the applicant.</p></div></div>
+          <div class="section-grid">
+            <label class="field"><span class="field-label">Age</span><span class="field-help">Applicant's age in completed years.</span><input name="person_age" type="number" min="18" max="100" step="1" value="30" placeholder="30" required><span class="field-example">18 to 100 years</span></label>
+            <label class="field"><span class="field-label">Home Ownership</span><span class="field-help">The applicant's current housing arrangement.</span><select name="person_home_ownership"><option value="RENT">Rent</option><option value="MORTGAGE">Mortgage</option><option value="OWN">Own</option><option value="OTHER">Other</option></select><span class="field-example">Choose the closest match</span></label>
+          </div>
+        </section>
+
+        <section class="form-section">
+          <div class="form-section-heading"><div><h3>Employment &amp; Income</h3><p>Information about earnings and work history.</p></div></div>
+          <div class="section-grid">
+            <label class="field"><span class="field-label">Annual Income</span><span class="field-help">Your total yearly income before taxes.</span><span class="input-wrap currency-wrap"><span class="input-prefix">₹</span><input name="person_income" class="currency-input" type="text" inputmode="numeric" data-min="1" value="600000" placeholder="6,00,000" required></span><span class="field-example">Example: ₹6,00,000</span></label>
+            <label class="field"><span class="field-label">Employment Length (years)</span><span class="field-help">Number of years you have been employed.</span><input name="person_emp_length" type="number" min="0" step="0.1" value="5" placeholder="5" required><span class="field-example">Example: 5 years</span></label>
+          </div>
+        </section>
+
+        <section class="form-section">
+          <div class="form-section-heading"><div><h3>Loan Information</h3><p>Details about the requested loan.</p></div></div>
+          <div class="section-grid">
+            <label class="field"><span class="field-label">Loan Purpose</span><span class="field-help">Why are you requesting this loan?</span><select name="loan_intent"><option value="PERSONAL">Personal</option><option value="EDUCATION">Education</option><option value="MEDICAL">Medical</option><option value="VENTURE">Business venture</option><option value="DEBTCONSOLIDATION">Debt consolidation</option><option value="HOMEIMPROVEMENT">Home improvement</option></select><span class="field-example">Choose the main reason</span></label>
+            <label class="field"><span class="field-label">Loan Amount</span><span class="field-help">Total amount of loan you want to borrow.</span><span class="input-wrap currency-wrap"><span class="input-prefix">₹</span><input name="loan_amnt" class="currency-input" type="text" inputmode="numeric" data-min="1" value="300000" placeholder="3,00,000" required></span><span class="field-example">Example: ₹5,00,000</span></label>
+            <label class="field"><span class="field-label">Interest Rate</span><span class="field-help">Annual interest rate associated with the loan.</span><span class="input-wrap"><input name="loan_int_rate" type="number" min="0.01" step="0.01" value="11.5" placeholder="11.5" required><span class="input-suffix">%</span></span><span class="field-example">Example: 11.5%</span></label>
+            <label class="field"><span class="field-label">Loan-to-Income Ratio <span class="calculated-badge">Auto-calculated</span></span><span class="field-help">Automatically calculated from your loan amount and annual income.</span><span class="input-wrap"><input id="loan-percent-income-display" name="loan_percent_income" class="calculated-input" type="text" value="—" readonly aria-readonly="true" aria-live="polite"></span><span class="field-example">Loan Amount ÷ Annual Income × 100</span></label>
+          </div>
+        </section>
+
+        <section class="form-section">
+          <div class="form-section-heading"><div><h3>Credit Information</h3><p>Details from the applicant's credit profile.</p></div></div>
+          <div class="section-grid">
+            <label class="field"><span class="field-label">Credit Grade</span><span class="field-help">Credit grade assigned to the applicant.</span><select name="loan_grade"><option value="A">A</option><option value="B" selected>B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option></select><span class="field-example">Use the grade shown on the application</span></label>
+            <label class="field"><span class="field-label">Previous Loan Default</span><span class="field-help">Whether you have previously defaulted on a loan.</span><select name="cb_person_default_on_file"><option value="N">No</option><option value="Y">Yes</option></select><span class="field-example">Choose Yes only if a default is recorded</span></label>
+            <label class="field"><span class="field-label">Credit History Length (years)</span><span class="field-help">Number of years of recorded credit history.</span><input name="cb_person_cred_hist_length" type="number" min="0" step="0.1" value="7" placeholder="7" required><span class="field-example">Example: 7 years</span></label>
+          </div>
+        </section>
+
+        <button id="assess-button" type="submit">Assess Credit Risk <span aria-hidden="true">→</span></button>
+        <p class="form-note">This assessment is for demonstration only and is not a business-approved credit decision.</p>
+      </form>
+
+      <section class="panel result-panel">
+        <div class="panel-heading"><div><p class="section-kicker">Decision support</p><h2>Risk assessment</h2></div></div>
+        <div id="empty-state" class="empty-state"><strong>Your assessment will appear here</strong><span>Complete the applicant profile to see the estimated probability, risk level, and explanation.</span></div>
+        <div id="result" class="hidden">
+          <div class="risk-head"><div><span class="label">Estimated Credit Risk</span><strong id="probability">—</strong></div><span id="risk-label" class="risk-pill">—</span></div>
+          <p id="risk-summary" class="risk-summary"></p>
+          <div class="meter" aria-label="Estimated credit risk probability"><div id="meter-fill"></div></div>
+          <p class="estimate-note">This is a model estimate, not a guarantee of loan approval or repayment.</p>
+        </div>
+      </section>
+    </section>
+
+    <section id="explanation" class="panel hidden">
+      <div class="panel-heading"><div><p class="section-kicker">Model explanation</p><h2>Why did the model make this estimate?</h2></div><span>Plain-language summary</span></div>
+      <div class="contributors"><div><h3 class="positive-title">Factors Increasing Risk</h3><div id="positive-factors"></div></div><div><h3 class="negative-title">Factors Reducing Risk</h3><div id="negative-factors"></div></div></div>
+      <p class="disclaimer">These statements describe model contributions, not causes or guarantees.</p>
+      <details id="technical-details" class="technical-details"><summary>Technical details</summary><div class="technical-grid"><div><span>Model</span><strong id="technical-model">—</strong></div><div><span>Decision threshold</span><strong id="technical-threshold">—</strong></div><div><span>Explanation method</span><strong>SHAP TreeExplainer</strong></div><div><span>Explanation space</span><strong id="technical-space">Raw margin / log-odds</strong></div><div><span>Base value</span><strong id="technical-base">—</strong></div></div><div class="technical-factors"><div><h4>Raw positive contributions</h4><div id="technical-positive"></div></div><div><h4>Raw negative contributions</h4><div id="technical-negative"></div></div></div></details>
+    </section>
+  </main>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

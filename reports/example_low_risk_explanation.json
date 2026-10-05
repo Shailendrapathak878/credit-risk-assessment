@@ -1,0 +1,71 @@
+{
+  "predicted_probability": 4.704848470282741e-05,
+  "predicted_class": 0,
+  "threshold": 0.5,
+  "base_value": -1.3270407915115356,
+  "output_space": "raw_margin_log_odds",
+  "positive_contributors": [
+    {
+      "feature": "categorical__loan_grade_A",
+      "feature_value": 0.0,
+      "shap_value": 0.1261293888092041,
+      "direction": "increases default risk"
+    },
+    {
+      "feature": "numerical__person_emp_length",
+      "feature_value": -1.1599363706685597,
+      "shap_value": 0.08560412377119064,
+      "direction": "increases default risk"
+    },
+    {
+      "feature": "categorical__loan_grade_C",
+      "feature_value": 0.0,
+      "shap_value": 0.029996328055858612,
+      "direction": "increases default risk"
+    },
+    {
+      "feature": "categorical__person_home_ownership_MORTGAGE",
+      "feature_value": 0.0,
+      "shap_value": 0.023751672357320786,
+      "direction": "increases default risk"
+    },
+    {
+      "feature": "numerical__employment_stability_ratio",
+      "feature_value": -1.2191423375886647,
+      "shap_value": 0.012380288913846016,
+      "direction": "increases default risk"
+    }
+  ],
+  "negative_contributors": [
+    {
+      "feature": "categorical__person_home_ownership_OWN",
+      "feature_value": 1.0,
+      "shap_value": -2.908881187438965,
+      "direction": "decreases default risk"
+    },
+    {
+      "feature": "categorical__loan_intent_VENTURE",
+      "feature_value": 1.0,
+      "shap_value": -1.3085864782333374,
+      "direction": "decreases default risk"
+    },
+    {
+      "feature": "numerical__person_income",
+      "feature_value": -0.24454072005732028,
+      "shap_value": -1.2867592573165894,
+      "direction": "decreases default risk"
+    },
+    {
+      "feature": "categorical__loan_grade_B",
+      "feature_value": 1.0,
+      "shap_value": -0.9012416005134583,
+      "direction": "decreases default risk"
+    },
+    {
+      "feature": "numerical__loan_int_rate",
+      "feature_value": -0.12974408238740498,
+      "shap_value": -0.7212202548980713,
+      "direction": "decreases default risk"
+    }
+  ]
+}

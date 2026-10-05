@@ -1,0 +1,71 @@
+{
+  "predicted_probability": 0.999964714050293,
+  "predicted_class": 1,
+  "threshold": 0.5,
+  "base_value": -1.3270407915115356,
+  "output_space": "raw_margin_log_odds",
+  "positive_contributors": [
+    {
+      "feature": "numerical__person_income",
+      "feature_value": -0.7382658085381771,
+      "shap_value": 2.8497085571289062,
+      "direction": "increases default risk"
+    },
+    {
+      "feature": "numerical__income_to_loan_ratio",
+      "feature_value": -0.5166339735069038,
+      "shap_value": 2.2520217895507812,
+      "direction": "increases default risk"
+    },
+    {
+      "feature": "categorical__loan_intent_HOMEIMPROVEMENT",
+      "feature_value": 1.0,
+      "shap_value": 1.5107219219207764,
+      "direction": "increases default risk"
+    },
+    {
+      "feature": "categorical__person_home_ownership_RENT",
+      "feature_value": 1.0,
+      "shap_value": 0.961465060710907,
+      "direction": "increases default risk"
+    },
+    {
+      "feature": "numerical__person_age",
+      "feature_value": -0.7432833150501024,
+      "shap_value": 0.8417839407920837,
+      "direction": "increases default risk"
+    }
+  ],
+  "negative_contributors": [
+    {
+      "feature": "categorical__loan_intent_DEBTCONSOLIDATION",
+      "feature_value": 0.0,
+      "shap_value": -0.09463715553283691,
+      "direction": "decreases default risk"
+    },
+    {
+      "feature": "categorical__loan_grade_D",
+      "feature_value": 0.0,
+      "shap_value": -0.05755884572863579,
+      "direction": "decreases default risk"
+    },
+    {
+      "feature": "categorical__loan_intent_MEDICAL",
+      "feature_value": 0.0,
+      "shap_value": -0.03499114513397217,
+      "direction": "decreases default risk"
+    },
+    {
+      "feature": "numerical__loan_amnt",
+      "feature_value": -0.5316163432077416,
+      "shap_value": -0.02027181163430214,
+      "direction": "decreases default risk"
+    },
+    {
+      "feature": "categorical__loan_grade_F",
+      "feature_value": 0.0,
+      "shap_value": -0.012337667867541313,
+      "direction": "decreases default risk"
+    }
+  ]
+}
